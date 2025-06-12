@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
+// import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
 export const Login = () => {
@@ -8,17 +8,25 @@ export const Login = () => {
 
 
 
-	useEffect(() => {
-		loadMessage()
-	}, [])
+	// useEffect(() => {
+	// 	loadMessage()
+	// }, [])
 
 	return (
-		<section>
+		<div className="container">
 			<form>
-				<input type="text" name="" id="" />
-				<input type="text" name="" id="" />
-				<button type="submit">Login</button>
+				<div className="mb-3">
+					<label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
+					<input type="email" className="form-control" id="email" placeholder="name@example.com" />
+				</div>
+				<div className="mb-3">
+					<label htmlFor="exampleFormControlTextarea1" className="form-label">Password</label>
+					<input type="password" className="form-control" id="password" placeholder="***********" />
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary mb-3">Submit</button>
+				</div>
 			</form>
-		</section>
+		</div>
 	);
 }; 
