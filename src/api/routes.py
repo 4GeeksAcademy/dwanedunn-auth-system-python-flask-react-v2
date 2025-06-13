@@ -37,3 +37,14 @@ def create_token():
     return jsonify(access_token=access_token), 200
 
     # return jsonify(response_body), 200
+
+
+@api.route('/private', methods=['GET'])
+@jwt_required()
+def get_protected_page():
+    current_user = get_jwt_identity()
+    user = User.query.get(current_user)
+    if user:
+        return jsonify(logged_in_as=user.email), 200
+    else:
+        return jsonify({"message": "user not found"}), 401
