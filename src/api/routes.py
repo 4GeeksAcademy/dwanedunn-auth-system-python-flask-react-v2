@@ -9,6 +9,7 @@ from flask_cors import CORS
 # https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage.html
 # Flask_JWT_Extended_Imports - ??
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 api = Blueprint('api', __name__)
@@ -17,27 +18,22 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
-
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
-
-    return jsonify(response_body), 200
-
 # Create the JWT
 
 
 @api.route('/token', methods=['POST'])
 def create_token():
-    # - from flask-jwt-extended-docs
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    if email != "test" or password != "test":
+    data = request.get_json()
+    email_value = data.get("email")
+    password_value = data.get("password")
+    if not email_value or not password_value:
         return jsonify({"msg": "Bad email or password"}), 401
-
-    access_token = create_access_token(identity=email)
+    find_user = User.query.filter_by(email=email_value).first()
+    if not find_user:
+        return jsonify({"message": "Invalid login"}), 401
+    if find_user.password != password_value:
+        return jsonify({"message": "Invalid password"}), 401
+    access_token = create_access_token(identity=email_value)
     return jsonify(access_token=access_token), 200
 
     # return jsonify(response_body), 200

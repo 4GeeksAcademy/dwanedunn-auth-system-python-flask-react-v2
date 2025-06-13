@@ -1,5 +1,5 @@
-export const login = async (email, password) => {
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
+const login = async (email, password) => {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/token`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -10,3 +10,5 @@ export const login = async (email, password) => {
   }
   return { data, status: response.status, ok: response.ok };
 };
+
+export { login };
