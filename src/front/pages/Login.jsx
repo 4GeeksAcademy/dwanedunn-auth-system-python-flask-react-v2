@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react"
 // import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { login } from "../hooks/actions";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-
+	const navigate = useNavigate()
 	const { store, dispatch } = useGlobalReducer()
 
 	const handleSubmit = async (e) => {
@@ -14,7 +15,9 @@ export const Login = () => {
 		const { data, ok } = await login(email, password)
 		if (ok) {
 			console.log("Login successfull", data)
-			
+			window.sessionStorage.setItem('accessToken', data.access_token)
+			console.log(window.sessionStorage.getItem('accessToken'))
+			navigate('/private')
 		}
 
 
