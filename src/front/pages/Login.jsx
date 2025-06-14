@@ -26,11 +26,11 @@ export const Login = () => {
 			<form onSubmit={handleSubmit}>
 				<div className="mb-3">
 					<label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
-					<input type="email" value={email} className="form-control" onChange={(e) => setEmail(e.target.value)} id="email" placeholder="name@example.com" autocomplete="off" />
+					<input type="email" value={email} className="form-control" onChange={(e) => setEmail(e.target.value)} id="email" placeholder="name@example.com" autoComplete="off" />
 				</div>
 				<div className="mb-3">
 					<label htmlFor="exampleFormControlTextarea1" className="form-label">Password</label>
-					<input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="***********" autocomplete="off" />
+					<input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="***********" autoComplete="off" />
 				</div>
 				<div>
 					<button type="submit" className="btn btn-primary mb-3" >Submit</button>
