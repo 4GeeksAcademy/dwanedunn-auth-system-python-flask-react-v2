@@ -19,10 +19,10 @@ export const Login = () => {
 
 	}
 
-	// TODO: check if user is already logged in, if so redirect to home page
+	// TODO: check if user is already logged in, if so redirect to protected page
 	useEffect(() => {
 		if (store.user) {
-			window.location.href = "/home"
+			window.location.href = "/protected" // use navigate from react-router-dom instead
 		}
 	}, [store.user])
 

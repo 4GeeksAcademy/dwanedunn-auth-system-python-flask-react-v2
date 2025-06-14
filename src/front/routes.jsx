@@ -9,7 +9,7 @@ import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Private } from "./pages/Private";
 import { Single } from "./pages/Single";
-import { Demo } from "./pages/Demo";
+// import { Demo } from "./pages/Demo";
 import { Login } from "./pages/Login";
 
 export const router = createBrowserRouter(
@@ -28,7 +28,7 @@ export const router = createBrowserRouter(
       <Route path="/private" element={<Private />} />
       <Route path="/login" element={<Login />} />
       <Route path="/single/:theId" element={<Single />} />  {/* Dynamic route for single items */}
-      <Route path="/demo" element={<Demo />} />
+      {/* <Route path="/demo" element={<Demo />} /> */}
     </Route>
   )
 );
