@@ -13,18 +13,14 @@ export const Login = () => {
 		e.preventDefault();
 		const { data, ok } = await login(email, password)
 		if (ok) {
-			console.log("Login successfull")
+			console.log("Login successfull", data)
+			
 		}
 
 
 	}
 
-	// TODO: check if user is already logged in, if so redirect to protected page
-	useEffect(() => {
-		if (store.user) {
-			window.location.href = "/protected" // use navigate from react-router-dom instead
-		}
-	}, [store.user])
+
 
 
 	return (
