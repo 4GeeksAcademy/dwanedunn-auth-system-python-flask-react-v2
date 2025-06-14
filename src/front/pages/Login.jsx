@@ -19,6 +19,12 @@ export const Login = () => {
 
 	}
 
+	// TODO: check if user is already logged in, if so redirect to home page
+	useEffect(() => {
+		if (store.user) {
+			window.location.href = "/home"
+		}
+	}, [store.user])
 
 
 	return (
