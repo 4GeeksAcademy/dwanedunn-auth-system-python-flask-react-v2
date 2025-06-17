@@ -19,10 +19,15 @@ export const Navbar = () => {
 				<div className="ml-auto">
 					<Link to="/login">
 						<button className="btn btn-primary">Log In</button>
+					</Link>
+					<Link to="/signup">
+						<button className="btn btn-primary">Signup</button>
+					</Link>
+					<Link to="#">
 						<button className="btn btn-primary" onClick={() => window.sessionStorage.removeItem('accessToken')}>Log Out</button>
 					</Link>
 				</div>
 			</div>
-		</nav>
+		</nav >
 	);
 };
