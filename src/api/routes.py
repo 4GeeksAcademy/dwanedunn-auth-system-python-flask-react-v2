@@ -31,7 +31,7 @@ def create_token():
     find_user = User.query.filter_by(email=email_value).first()
     if not find_user:
         return jsonify({"message": "Invalid login"}), 401
-    if find_user.password != password_value:
+    if not check_password_hash(find_user.password, password_value):
         return jsonify({"message": "Invalid password"}), 401
     access_token = create_access_token(identity=email_value)
     return jsonify(access_token=access_token), 200

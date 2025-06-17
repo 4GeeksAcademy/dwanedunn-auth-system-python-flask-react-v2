@@ -11,7 +11,7 @@ const login = async (email, password) => {
   return { data, status: response.status, ok: response.ok };
 };
 
-export const signup = async (email, password) => {
+const signup = async (email, password) => {
   const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/signup`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

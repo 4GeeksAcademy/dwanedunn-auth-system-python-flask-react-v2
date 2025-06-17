@@ -19,7 +19,7 @@ export const Signup = () => {
 			console.log("Sign up successfull", data)
 			// window.sessionStorage.setItem('accessToken', data.access_token)
 			// console.log(window.sessionStorage.getItem('accessToken'))
-			// navigate('/private')
+			navigate('/login')
 		}
 	}
 
