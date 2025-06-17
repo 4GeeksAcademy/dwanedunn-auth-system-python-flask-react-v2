@@ -16,10 +16,10 @@ export const SignUp = () => {
 		e.preventDefault();
 		const { data, ok } = await login(email, password)
 		if (ok) {
-			console.log("Login successfull", data)
-			window.sessionStorage.setItem('accessToken', data.access_token)
+			console.log("Sign up successfull", data)
+			// window.sessionStorage.setItem('accessToken', data.access_token)
 			console.log(window.sessionStorage.getItem('accessToken'))
-			navigate('/private')
+			// navigate('/private')
 		}
 	}
 
@@ -41,4 +41,4 @@ export const SignUp = () => {
 			</form>
 		</div>
 	);
-}; 
+};
