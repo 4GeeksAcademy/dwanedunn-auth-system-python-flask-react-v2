@@ -5,7 +5,7 @@ import { login } from "../hooks/actions";
 import { useNavigate } from "react-router-dom";
 
 // TODO: Refactor as needed to implement signup functionality
-export const SignUp = () => {
+export const Signup = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const navigate = useNavigate()
