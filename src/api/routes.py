@@ -47,7 +47,7 @@ def create_token():
 # return the user data in the response
 
 
-@api.route('/user', methods=['POST'])
+@api.route('/signup', methods=['POST'])
 def create_user():
     data = request.get_json()
     email_value = data.get("email")

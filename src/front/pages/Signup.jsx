@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 // import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import { login } from "../hooks/actions";
+import { signup } from "../hooks/actions";
 import { useNavigate } from "react-router-dom";
 
 // TODO: Refactor as needed to implement signup functionality
@@ -14,11 +14,11 @@ export const Signup = () => {
 	// TODO: Implement the signup functionality
 	const handleSignUp = async (e) => {
 		e.preventDefault();
-		const { data, ok } = await login(email, password)
+		const { data, ok } = await signup(email, password)
 		if (ok) {
 			console.log("Sign up successfull", data)
 			// window.sessionStorage.setItem('accessToken', data.access_token)
-			console.log(window.sessionStorage.getItem('accessToken'))
+			// console.log(window.sessionStorage.getItem('accessToken'))
 			// navigate('/private')
 		}
 	}
