@@ -52,15 +52,17 @@ def create_user():
     data = request.get_json()
     email_value = data.get("email")
     password_value = data.get("password")
-    if not email_value or not password_value:
-        return jsonify({"msg": "Bad email or password"}), 401
+    if not email_value:
+        return jsonify({"msg": "Bad email"}), 409
     find_user = User.query.filter_by(email=email_value).first()
     if find_user:
-        return jsonify({"message": "User already exists"}), 401
-    new_user = User(email=email_value, password=password_value, is_active=True)
+        return jsonify({"message": "User already exists"}), 409
+    hashed_password = generate_password_hash(password_value)
+    new_user = User(email=email_value,
+                    password=hashed_password, is_active=True)
     db.session.add(new_user)
     db.session.commit()
-    return jsonify(new_user.serialize()), 200
+    return jsonify({"message": "User created"}), 200
 
 
 @api.route('/private', methods=['GET'])
