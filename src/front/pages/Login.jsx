@@ -15,8 +15,9 @@ export const Login = () => {
 		const { data, ok } = await login(email, password)
 		if (ok) {
 			console.log("Login successfull", data)
-			window.sessionStorage.setItem('accessToken', data.access_token)
-			console.log(window.sessionStorage.getItem('accessToken'))
+			window.sessionStorage.setItem('token', data.access_token)
+			dispatch({ type: 'updateToken', payload: data.access_token });
+			// console.log(window.sessionStorage.getItem('accessToken'))
 			navigate('/private')
 		}
 
@@ -43,4 +44,4 @@ export const Login = () => {
 			</form>
 		</div>
 	);
-}; 
+};

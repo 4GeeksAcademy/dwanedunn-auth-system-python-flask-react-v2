@@ -65,7 +65,7 @@ def create_user():
     return jsonify({"message": "User created"}), 200
 
 
-@api.route('/private', methods=['GET'])
+@api.route('/protected', methods=['GET'])
 @jwt_required()
 def get_protected_page():
     current_user = get_jwt_identity()

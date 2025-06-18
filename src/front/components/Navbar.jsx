@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { logout, protectedRoute } from '../hooks/actions';
-
+import useGlobalReducer from '../hooks/useGlobalReducer.jsx';
 
 export const Navbar = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+	const { store, dispatch } = useGlobalReducer();
+	const [userEmail, setUserEmail] = useState(null);
 	useEffect(() => {
 		// window.sessionStorage.getItem('token')
 		// 	? setIsAuthenticated(true)
@@ -14,15 +15,27 @@ export const Navbar = () => {
 			const { data, ok } = await protectedRoute();
 			if (ok) {
 				setIsAuthenticated(true);
-			} else { setIsAuthenticated(false) }
+				setUserEmail(data.logged_in_as);
+			} else {
+				logout();
+				dispatch({ type: 'updateToken', payload: null });
+				setIsAuthenticated(false);
+			}
+		};
+		const token = localStorage.getItem('token');
+		if (!store.token && token) {
+			dispatch({ type: 'updateToken', payload: { token } });
+			checkAuthentication();
+		} else if (store.token) {
+			checkAuthentication();
 		}
-		checkAuthentication();
-	}, []);
+	}, [store.token, dispatch]);
 
 	const handleLogout = () => {
 		logout();
+		dispatch({ type: 'updateToken', payload: { token: null } });
 		setIsAuthenticated(false);
-		localStorage.removeItem('token');
+		// localStorage.removeItem('token');
 		// window.sessionStorage.removeItem('token');
 	};
 
@@ -33,13 +46,15 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1 ">Home</span>
 				</Link>
 				<div className="ml-auto">
-					{isAuthenticated ? (<>
-						<Link to="/">
-							<button className="btn btn-primary" onClick={handleLogout}>
-								Log Out
-							</button>{' '}
-						</Link>
-					</>
+					{store.token ? (
+						<>
+							<p>welcome,{userEmail}</p>
+							<Link to="/">
+								<button className="btn btn-primary" onClick={handleLogout}>
+									Log Out
+								</button>{' '}
+							</Link>
+						</>
 					) : (
 						<Link to="/login">
 							<button className="btn btn-primary">Log In</button>

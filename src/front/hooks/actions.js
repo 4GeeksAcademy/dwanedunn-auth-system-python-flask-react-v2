@@ -28,15 +28,23 @@ const protectedRoute = async () => {
   if (!token) {
     return { ok: false, message: 'Not token found' };
   }
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/private`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  console.log('Token found:', token);
+  const response = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}/protected`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const data = await response.json();
+  console.log('Protected route response:', data);
   if (response.ok) {
-    return { ok: true, data: await response.json() };
+    return { ok: true, data: data };
   } else {
     return { ok: false, message: 'Access denied' };
   }
-  const data = await response.json();
+
   return { data, ok: response.ok, status: response.status };
 };
 
