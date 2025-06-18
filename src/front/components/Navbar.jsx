@@ -11,7 +11,7 @@ export const Navbar = () => {
 		// 	? setIsAuthenticated(true)
 		// 	: setIsAuthenticated(false);
 		const checkAuthentication = async () => {
-			const { ok } = await protectedRoute();
+			const { data, ok } = await protectedRoute();
 			if (ok) {
 				setIsAuthenticated(true);
 			} else { setIsAuthenticated(false) }
@@ -33,12 +33,13 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1 ">Home</span>
 				</Link>
 				<div className="ml-auto">
-					{isAuthenticated ? (
+					{isAuthenticated ? (<>
 						<Link to="/">
 							<button className="btn btn-primary" onClick={handleLogout}>
 								Log Out
 							</button>{' '}
 						</Link>
+					</>
 					) : (
 						<Link to="/login">
 							<button className="btn btn-primary">Log In</button>

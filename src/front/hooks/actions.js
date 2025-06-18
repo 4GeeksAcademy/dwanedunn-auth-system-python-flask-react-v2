@@ -26,7 +26,7 @@ const signup = async (email, password) => {
 const protectedRoute = async () => {
   const token = localStorage.getItem('token');
   if (!token) {
-    return { ok: false, message: 'Not authenticated' };
+    return { ok: false, message: 'Not token found' };
   }
   const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/private`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -36,6 +36,8 @@ const protectedRoute = async () => {
   } else {
     return { ok: false, message: 'Access denied' };
   }
+  const data = await response.json();
+  return { data, ok: response.ok, status: response.status };
 };
 
 const logout = () => {
