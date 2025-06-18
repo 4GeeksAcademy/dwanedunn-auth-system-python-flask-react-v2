@@ -23,4 +23,23 @@ const signup = async (email, password) => {
   }
 };
 
-export { login, signup };
+const protectedRoute = async () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return { ok: false, message: 'Not authenticated' };
+  }
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/private`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (response.ok) {
+    return { ok: true, data: await response.json() };
+  } else {
+    return { ok: false, message: 'Access denied' };
+  }
+};
+
+const logout = () => {
+  localStorage.removeItem('token');
+};
+
+export { login, signup, logout, protectedRoute };
